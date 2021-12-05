@@ -4,20 +4,20 @@ def parse_data():
     with open("data.txt") as f:
         data = f.readlines()
 
-    points = {}
+    coordinates = {}
 
     for i, line in enumerate(data):
-        points[i] = [[int(xy_int) for xy_int in xy.split(",")] for xy in line.split(" -> ")]
+        coordinates[i] = [[int(xy_int) for xy_int in xy.split(",")] for xy in line.split(" -> ")]
 
-    return points
+    return coordinates
 
 
 def part_1():
-    points = parse_data()
+    coordinates = parse_data()
 
     counter_dict = {}
 
-    for point in points.values():
+    for point in coordinates.values():
         if point[0][0] == point[1][0]:
             for i in range(point[0][1], point[1][1] + (-1 if point[0][1] > point[1][1] else 1),-1 if point[0][1] > point[1][1] else 1):
                 counter_dict[(point[0][0], i)] = counter_dict.get((point[0][0], i),0) + 1
@@ -29,10 +29,10 @@ def part_1():
 
 
 def part_2():
-    points = parse_data()
+    coordinates = parse_data()
     counter_dict = {}
 
-    for point in points.values():
+    for point in coordinates.values():
         if point[0][0] == point[1][0]:
             for i in range(point[0][1], point[1][1] + (-1 if point[0][1] > point[1][1] else 1),-1 if point[0][1] > point[1][1] else 1):
                 counter_dict[(point[0][0], i)] = counter_dict.get((point[0][0], i),0) + 1
