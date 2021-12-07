@@ -20,7 +20,7 @@ def part_2():
     fuel_consumption = {}
 
     for i in range(min(data), max(data)):
-        fuel_consumption[i] = sum([abs((crab-i))*(abs(crab-i) + 1)/2 if crab > i else abs((crab-i))*(abs(crab-i) + 1)/2 for crab in data])
+        fuel_consumption[i] = sum([abs((crab-i))*(abs(crab-i) + 1)/2 for crab in data])
 
 
     return min(fuel_consumption.values())
