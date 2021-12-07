@@ -7,7 +7,7 @@ def part_1():
     fuel_consumption = {}
 
     for i in range(min(data),max(data)):
-        fuel_consumption[i] = sum([crab-i if crab > i else i-crab for crab in data])
+        fuel_consumption[i] = sum([abs(crab-i) for crab in data])
 
 
     return min(fuel_consumption.values())
