@@ -1,5 +1,4 @@
 
-
 def parse_data():
     with open("data.txt") as f:
         data = f.readlines()
