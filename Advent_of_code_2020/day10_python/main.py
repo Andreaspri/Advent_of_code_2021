@@ -1,36 +1,47 @@
-jolt1=0
-jolt3=0
-with open("data.txt", "r") as f:
-    f = f.readlines()
-f = [int(f[i]) for i in range(len(f))]  
-f.append(0)
-f.sort()
-f.append(f[len(f)-1]+3)
 
-for i in range(1,len(f)):
-    if f[i] - f[i-1] == 1:
-        jolt1 += 1
-    elif f[i] - f[i-1] == 3:
-        jolt3 += 1
-print("Part 1: ",jolt1*(jolt3))
+def day10_part1(arr):
+    arr.sort()
+    jolt1 = 1
+    jolt3 = 1
+    try:
+        for i,num in enumerate(arr):
+            jolt = arr[i+1]-num
+            if jolt == 1:
+                jolt1 += 1
+            elif jolt == 3:
+                jolt3 += 1
 
-
+    except IndexError:
+        return jolt1 * jolt3
 
 
-i=1
-current = 1
-temp = []
-while i < len(f):
-    if f[i-1] == f[i]-1:
-        temp.append(f[i-1])
-    elif f[i-1]+1 != f[i]:
-        if len(temp) == 2:
-            current *= 2
-        elif  len(temp) == 3:
-            current *= 4
-        elif len(temp) == 4:
-            current *= 7
-        temp = []
-    i+=1
+def day10_part2(arr):
+    arr.sort()
+    arr.insert(0,0)
+    arr.append(arr[-1]+3)
+    count = 0
+    combinations = 1
+    for i,num in enumerate(arr):
+        try:
+            if arr[i+1]-num == 1:
+                count += 1
+            elif arr[i+1]-num != 1:
 
-print("Part 2: ",current)
+                if count == 2:
+                    combinations *= 2
+                elif count == 3:
+                    combinations *= 4
+                elif count == 4:
+                    combinations *= 7
+                count = 0
+
+        except IndexError:
+
+            return combinations
+
+if __name__ == '__main__':
+    with open("data.txt", "r") as f:
+        nums = f.readlines()
+    nums = [int(i) for i in nums]
+    print("Part 1:",day10_part1(nums))
+    print("Part 2:",day10_part2(nums))

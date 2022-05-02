@@ -1,21 +1,39 @@
-import itertools
 
-with open("data.txt", "r") as f:
-    f = f.readlines()
-f = [int(f[i]) for i in range(len(f))]
+def check_target(integer_list, target_num):
+    dict_integers = dict()
+    for i,num in enumerate(integer_list):
+        dict_integers[num] = dict_integers.get(num,i)
+        complement = target_num - num
+        if complement in dict_integers:
+            if complement == num and dict_integers[complement] != i or complement != num:
+                return True
 
-for i in range(len(f)):
-    temp = [sum(p) for p in itertools.combinations(f[i:i+25],2)]
-    if f[i+25] not in temp:
-        special = f[i+25]
-        break
+    return False
 
-for i in range(len(f)): # This is part2
-    for j in range(len(f)):
-        if sum(f[j:i+j]) == special:
-            temp = f[j:i+j]
-            temp.sort()
-            sum_low_high = temp[0]+temp[len(temp)-1]
 
-print("Part 1: ",special)
-print("Part 2: ",sum_low_high)
+def day9_part1(arr,preamble):
+    for i in range(preamble,len(arr)-preamble):
+        if not check_target(arr[i:preamble+i],arr[preamble+i]):
+            return arr[preamble+i]
+
+
+def day9_part2(arr,target):
+    n = 3
+    while True:
+        for p in range(len(arr)):
+            sliced_arr = arr[p:n+p]
+            if sum(sliced_arr) == target:
+                return min(sliced_arr) + max(sliced_arr)
+
+        n += 1
+
+if __name__ == '__main__':
+
+    with open("data.txt","r") as f:
+        data = [int(i) for i in f.readlines() if i != '\n']
+
+    part1 = day9_part1(data,25)
+    part2 = day9_part2(data,part1)
+
+    print("Part 1:",part1)
+    print("Part 2:",part2)
