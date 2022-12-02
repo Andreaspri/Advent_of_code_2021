@@ -1,2 +1,2 @@
 # Advent_of_code
-This is my solutions to Advent of code
+This is my solutions for advent of code
