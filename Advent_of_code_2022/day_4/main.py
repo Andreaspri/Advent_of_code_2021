@@ -25,9 +25,9 @@ def part_2(data):
     count = 0
     for line in data:
         first, second = line.split(",")
-        first_range = set(range(int(first.split("-")[0]), int(first.split("-")[1]) + 1))
-        second_range = set(range(int(second.split("-")[0]), int(second.split("-")[1]) + 1))
-        if first_range & second_range:
+        first_set = set(range(int(first.split("-")[0]), int(first.split("-")[1]) + 1))
+        second_set = set(range(int(second.split("-")[0]), int(second.split("-")[1]) + 1))
+        if first_set & second_set:
             count += 1
 
     return count
