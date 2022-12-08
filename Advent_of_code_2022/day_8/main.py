@@ -21,9 +21,9 @@ def part_1(grid):
 
 def count_trees(arr, tree):
     count = 0
-    for k in range(len(arr)):
+    for k in arr:
         count += 1
-        if arr[k] >= tree:
+        if k >= tree:
             break
     return count
     
