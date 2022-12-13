@@ -10,7 +10,6 @@ class Node:
         self.x = x
         self.y = y
         self.depth = depth
-        self.cost =  self.depth + self.calculate_cost()
         self.parent = parent
 
     def get_neighbours(self):
@@ -20,24 +19,22 @@ class Node:
     def is_valid(self, parent, grid):
         if self.x < 0 or self.y < 0 or self.x >= len(grid) or self.y >= len(grid[0]):
             return False
+        if grid[self.x][self.y] == "E" and grid[parent.x][parent.y] != "z" and \
+            grid[self.x][self.y] == "E" and grid[parent.x][parent.y] != "y":
+            return False
         if grid[parent.x][parent.y] == "S":
             return True
         if (ord(grid[parent.x][parent.y]) - ord(grid[self.x][self.y])) < -1:
             return False
-        if grid[self.x][self.y] == "E" and grid[parent.x][parent.y] != "z":
-            return False
         return True
 
     def overwrite_node(self, other):
-        self.cost = other.cost
         self.parent = other.parent
         self.depth = other.depth
 
-    def calculate_cost(self):
-        return abs(self.x - GOAL[0]) + abs(self.y - GOAL[1])
-
     def __lt__(self, other):
-        return self.cost < other.cost
+        return self.depth < other.depth
+        
 
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
@@ -58,7 +55,7 @@ def day_12(start, grid):
         for neighbour in node.get_neighbours():
             if neighbour in nodes_lookup and neighbour < nodes_lookup[neighbour]:
                 nodes_lookup[neighbour].overwrite_node(neighbour)
-                # Need to heapify after changing the cost of a node internaly
+                # Need to heapify after changing the depth of a node internaly
                 heapq.heapify(nodes)
 
             elif neighbour.is_valid(node, grid) and neighbour not in nodes_lookup:
