@@ -23,25 +23,15 @@ def compare(left, right):
                 return result
 
         elif isinstance(l, int) and isinstance(r, int):
-            # This stops the function with the first result check.
-            # Even if the lists have more items
-            # This was not specified as allowed in the problem
-            # But it works for the given input
             if l < r:
                 return True
             elif l > r:
                 return False
 
-    # Not entirely sure if this is correct
-    # But it works for the given input
-    # It will end this function by returning false or true without checking the rest of the outer list
-    # Unless the lists are the same length
     if len(left) < len(right):
         return True
     elif len(left) > len(right):
         return False
-
-
 
 
 def part_1(pairs):
