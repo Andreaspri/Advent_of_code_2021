@@ -63,8 +63,7 @@ def part_2(pairs):
     while flag:
         flag = False
         for j in range(len(reduced)-1):
-            # not compare because that gave me the right answer
-            if not compare(reduced[j], reduced[j+1]):
+            if compare(reduced[j+1], reduced[j]):
                 reduced[j], reduced[j+1] = reduced[j+1], reduced[j]
                 flag = True
 
