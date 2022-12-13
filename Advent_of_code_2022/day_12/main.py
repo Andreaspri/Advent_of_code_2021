@@ -42,7 +42,6 @@ class Node:
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
 
-
     def __hash__(self):
         return hash((self.x, self.y))
 
@@ -57,7 +56,7 @@ def day_12(start, grid):
             return node.depth
 
         for neighbour in node.get_neighbours():
-            if neighbour in nodes_lookup and neighbour.cost < nodes_lookup[neighbour].cost:
+            if neighbour in nodes_lookup and neighbour < nodes_lookup[neighbour]:
                 nodes_lookup[neighbour].overwrite_node(neighbour)
                 # Need to heapify after changing the cost of a node internaly
                 heapq.heapify(nodes)
