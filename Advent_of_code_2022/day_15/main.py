@@ -1,37 +1,26 @@
 import os
 import re
+import itertools as it
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 
 def part_1(sensor_data):
+    y_line = 2000000
     impossible_locations = set()
-    becons = set()
+    beacons = set()
     for sensor in sensor_data:
         sensor_x, sensor_y = sensor[:2]
-        becon_x, becon_y = sensor[2:]
-        becons.add((becon_x, becon_y))
-        distance = abs(sensor_x - becon_x) + abs(sensor_y - becon_y)
+        beacon_x, beacon_y = sensor[2:]
+        beacons.add((beacon_x, beacon_y))
+        distance = abs(sensor_x - beacon_x) + abs(sensor_y - beacon_y)
+        distance_to_y = abs(sensor_y - y_line)
+        if distance_to_y <= distance:
+            impossible_range = list(it.zip_longest(range(
+                sensor_x - distance + distance_to_y, sensor_x + distance - distance_to_y+1),[y_line], fillvalue=y_line))
+            impossible_locations.update(impossible_range)
 
-        y = 2000000
-        dy = abs(y - sensor_y)
-        add = sensor_x
-        subtract = sensor_x
-        while True:
-            line_distance_add = abs(add - sensor_x) + dy
-            line_distance_subtract = abs(subtract - sensor_x) + dy
-            if line_distance_add <= distance:
-                impossible_locations.add((add, y))
-                add += 1
-            if line_distance_subtract <= distance:
-                impossible_locations.add((subtract, y))
-                subtract -= 1
-            if line_distance_add > distance and line_distance_subtract > distance:
-                break
-
-    return len(impossible_locations-becons)
-
-
+    return len(impossible_locations-beacons)
 
 
 def calcualte_distance(sensor, point):
@@ -116,3 +105,4 @@ if __name__ == "__main__":
     print("Part 1:", part_1(data))
     beacon_position = part_2(data)
     print("Part 2:", beacon_position[0]*4000000 + beacon_position[1])
+
