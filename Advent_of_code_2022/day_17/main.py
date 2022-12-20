@@ -93,7 +93,7 @@ def part_2(moves: list, n: int) -> int:
 if __name__ == '__main__':
     with open("data.txt") as f:
         data = list(f.read())
-    print("Part 1:", part_1(data, 633+172))
+    print("Part 1:", part_1(data, 2022))
 
 
 
