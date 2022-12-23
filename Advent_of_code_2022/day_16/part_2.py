@@ -23,8 +23,8 @@ class Cave:
         cave.remove("AA")
         for i in range(self.num_travelers):
             # Random chice from the cave with np
-            genome_1 = [random.choice(cave) for i in range(self.minutes_to_live//2)]
-            genome_2 = [random.choice(cave) for i in range(self.minutes_to_live//2)]
+            genome_1 = [random.choice(cave) for i in range(min(self.minutes_to_live//2, len(cave)))]
+            genome_2 = [random.choice(cave) for i in range(min(self.minutes_to_live//2, len(cave)))]
             traveler = Traveler(genome_1, genome_2)
             traveler.genome_1.insert(0, self.start)
             traveler.genome_2.insert(0, self.start)
