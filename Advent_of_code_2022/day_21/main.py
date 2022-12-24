@@ -79,9 +79,9 @@ if __name__ == "__main__":
     monkeys = {}
     for line in data:
         monkey, rest = line.split(": ")
-        try:
+        if rest.isdigit():
             monkeys[monkey] = int(rest)
-        except:
+        else:
             monkeys[monkey] = rest
 
     print("Part 1:", int(part_1("root")))
