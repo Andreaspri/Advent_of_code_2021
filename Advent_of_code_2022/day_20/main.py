@@ -123,5 +123,3 @@ if __name__ == "__main__":
         ll2.append(int(num)*input_number, i)
 
     print("Part 2:", part_2(ll2))
-
-    # 11589 too high
