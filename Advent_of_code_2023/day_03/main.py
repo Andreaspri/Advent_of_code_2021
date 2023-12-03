@@ -89,4 +89,4 @@ if __name__ == "__main__":
     numbers = parse(lines)
     
     print("Part 1:", part_1(numbers)) 
-    print("Part 2:", part_2(numbers)) # 4499251 is too low
+    print("Part 2:", part_2(numbers))
