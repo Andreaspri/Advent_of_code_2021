@@ -315,3 +315,4 @@ if __name__ == "__main__":
         bitmap = concatenate_tiles(board)
         
         print("Part 2:", part_2(bitmap))
+
